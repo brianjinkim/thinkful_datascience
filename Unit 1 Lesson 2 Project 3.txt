@@ -1,0 +1,207 @@
+-- What was the hottest day in our data set? Where was that?
+SELECT
+	MAX(maxTemperatureF),
+	ZIP
+FROM
+	weather
+-- max tempearture was 134 in zip 94063
+
+
+
+
+-- How many trips started at each station?
+SELECT
+	start_station,
+	COUNT(*) number_of_trips
+FROM
+	trips
+GROUP BY start_station
+ORDER BY number_of_trips DESC
+/*
+"San Francisco Caltrain (Townsend at 4th)"	"23591"
+"San Francisco Caltrain 2 (330 Townsend)"	"22358"
+"Harry Bridges Plaza (Ferry Building)"	"16128"
+"2nd at Townsend"	"14099"
+"Steuart at Market"	"13693"
+"Embarcadero at Sansome"	"13424"
+"Temporary Transbay Terminal (Howard at Beale)"	"13111"
+"Townsend at 7th"	"11170"
+"Market at Sansome"	"10970"
+"Market at 10th"	"9937"
+"Embarcadero at Folsom"	"7820"
+"2nd at South Park"	"7722"
+"Embarcadero at Bryant"	"7714"
+"Howard at 2nd"	"7583"
+"2nd at Folsom"	"7464"
+"Beale at Market"	"7373"
+"Market at 4th"	"7337"
+"Powell Street BART"	"6826"
+"Grant Avenue at Columbus Avenue"	"6735"
+"Broadway St at Battery St"	"5695"
+"Mechanics Plaza (Market at Battery)"	"5613"
+"5th at Howard"	"5436"
+"South Van Ness at Market"	"5398"
+"Davis at Jackson"	"5240"
+"Spear at Folsom"	"5113"
+"Civic Center BART (7th at Market)"	"5043"
+"Commercial at Montgomery"	"4969"
+"Embarcadero at Vallejo"	"4710"
+"Powell at Post (Union Square)"	"4488"
+"Clay at Battery"	"4357"
+"Post at Kearny"	"4348"
+"San Jose Diridon Caltrain Station"	"4035"
+"Yerba Buena Center of the Arts (3rd @ Howard)"	"3460"
+"Golden Gate at Polk"	"3309"
+"Washington at Kearny"	"2844"
+"Mountain View Caltrain Station"	"2515"
+"San Francisco City Hall"	"2195"
+"Santa Clara at Almaden"	"1447"
+"Mountain View City Hall"	"1291"
+"San Pedro Square"	"1215"
+"Palo Alto Caltrain Station"	"1170"
+"Castro Street and El Camino Real"	"1014"
+"Japantown"	"945"
+"Ryland Park"	"879"
+"Paseo de San Antonio"	"833"
+"Adobe on Almaden"	"789"
+"Cowper at University"	"788"
+"Redwood City Caltrain Station"	"695"
+"St James Park"	"694"
+"MLK Library"	"630"
+"San Antonio Caltrain Station"	"611"
+"San Antonio Shopping Center"	"559"
+"Arena Green / SAP Center"	"547"
+"San Jose Civic Center"	"543"
+"San Salvador at 1st"	"540"
+"San Jose City Hall"	"518"
+"University and Emerson"	"490"
+"SJSU - San Salvador at 9th"	"481"
+"Stanford in Redwood City"	"428"
+"Santa Clara County Civic Center"	"420"
+"California Ave Caltrain Station"	"392"
+"SJSU 4th at San Carlos"	"363"
+"Charleston Park/ North Bayshore Area"	"343"
+"Park at Olive"	"276"
+"5th St at Folsom St"	"173"
+"Kaiser Hospital"	"147"
+"Mezes"	"119"
+"San Mateo County Center"	"86"
+"S. Market St at Park Ave"	"84"
+"Evelyn Park and Ride"	"71"
+"Cyril Magnin St at Ellis St"	"69"
+"Middlefield Light Rail Station"	"66"
+"Redwood City Public Library"	"59"
+"Rengstorff Avenue / California Street"	"42"
+"5th S at E. San Salvador St"	"19"
+"Sequoia Hospital"	"15"
+"Mezes Park"	"7"
+"Redwood City Medical Center"	"5"
+"Franklin at Maple"	"2"
+"5th St at E. San Salvador St"	"1"
+*/
+
+
+
+
+
+-- What's the shortest trip that happened?
+SELECT
+	min(duration) duration
+FROM
+	trips
+-- shortest duration is 60
+
+
+
+
+
+-- What is the average trip duration, by end station?
+SELECT
+	AVG(duration) duration,
+	end_station
+FROM
+	trips
+GROUP BY end_station
+ORDER BY duration
+/*
+"257.0"	"Mezes Park"
+"359.083333333333"	"Redwood City Medical Center"
+"527.298013245033"	"5th St at Folsom St"
+"531.589903573454"	"2nd at South Park"
+"557.050760233918"	"2nd at Folsom"
+"564.716529250098"	"Commercial at Montgomery"
+"578.417298937785"	"St James Park"
+"582.835282729693"	"Temporary Transbay Terminal (Howard at Beale)"
+"583.572311104071"	"5th at Howard"
+"592.663818038391"	"Howard at 2nd"
+"599.522307692308"	"San Jose Diridon Caltrain Station"
+"608.985535197686"	"Spear at Folsom"
+"609.492032547889"	"San Francisco Caltrain 2 (330 Townsend)"
+"612.926951946143"	"Market at Sansome"
+"613.881648422408"	"Embarcadero at Folsom"
+"633.257044057377"	"2nd at Townsend"
+"644.850877192982"	"Mezes"
+"651.160204828091"	"Mountain View City Hall"
+"666.20582801478"	"Townsend at 7th"
+"668.527482330337"	"Steuart at Market"
+"670.296296296296"	"Kaiser Hospital"
+"686.0"	"5th St at E. San Salvador St"
+"697.743581616482"	"Embarcadero at Bryant"
+"699.791838134431"	"Beale at Market"
+"723.110629443385"	"San Francisco Caltrain (Townsend at 4th)"
+"724.399671052632"	"San Antonio Shopping Center"
+"724.440170940171"	"Paseo de San Antonio"
+"726.675843083276"	"Santa Clara at Almaden"
+"731.368790591539"	"Mechanics Plaza (Market at Battery)"
+"735.510463121784"	"Davis at Jackson"
+"739.013157894737"	"Evelyn Park and Ride"
+"744.221122112211"	"Post at Kearny"
+"756.494616846105"	"Broadway St at Battery St"
+"757.095514112903"	"Yerba Buena Center of the Arts (3rd @ Howard)"
+"802.502173913044"	"Castro Street and El Camino Real"
+"816.377488514548"	"San Pedro Square"
+"828.990789473684"	"Adobe on Almaden"
+"856.799765258216"	"Clay at Battery"
+"918.877354048964"	"Harry Bridges Plaza (Ferry Building)"
+"967.132432432432"	"SJSU 4th at San Carlos"
+"969.828918322296"	"Japantown"
+"991.009053738318"	"Powell Street BART"
+"996.88296178344"	"Mountain View Caltrain Station"
+"1008.02884615385"	"San Mateo County Center"
+"1012.9728"	"MLK Library"
+"1022.00102234555"	"Market at 4th"
+"1033.10343347639"	"Civic Center BART (7th at Market)"
+"1044.92866020383"	"Market at 10th"
+"1061.88506107109"	"Washington at Kearny"
+"1071.65904365904"	"Stanford in Redwood City"
+"1083.68190127971"	"San Antonio Caltrain Station"
+"1084.99333333333"	"San Salvador at 1st"
+"1147.66666666667"	"Redwood City Caltrain Station"
+"1147.76053215078"	"San Jose City Hall"
+"1186.70149253731"	"Redwood City Public Library"
+"1199.87096774194"	"Middlefield Light Rail Station"
+"1210.07079646018"	"Cowper at University"
+"1223.40402969247"	"Ryland Park"
+"1227.61968680089"	"SJSU - San Salvador at 9th"
+"1277.80007601672"	"Golden Gate at Polk"
+"1361.31942215088"	"San Francisco City Hall"
+"1366.03096774194"	"South Van Ness at Market"
+"1372.67024684379"	"Embarcadero at Vallejo"
+"1400.38250762937"	"Embarcadero at Sansome"
+"1405.99264705882"	"Park at Olive"
+"1426.47592592593"	"Arena Green / SAP Center"
+"1478.68141836174"	"Grant Avenue at Columbus Avenue"
+"1585.74757281553"	"S. Market St at Park Ave"
+"1604.77399380805"	"Santa Clara County Civic Center"
+"1631.98155673648"	"Powell at Post (Union Square)"
+"1633.5"	"Sequoia Hospital"
+"1658.5"	"Rengstorff Avenue / California Street"
+"1767.0"	"5th S at E. San Salvador St"
+"1825.5910543131"	"California Ave Caltrain Station"
+"1927.44844357977"	"Palo Alto Caltrain Station"
+"2068.6"	"Franklin at Maple"
+"2370.22615803815"	"Charleston Park/ North Bayshore Area"
+"2372.58423493045"	"San Jose Civic Center"
+"2926.22058823529"	"Cyril Magnin St at Ellis St"
+"4710.89772727273"	"University and Emerson"
+*/
