@@ -1,0 +1,39 @@
+--Which neighborhood appears to be most popular (least availability) in the next 30 days?
+SELECT	AVG(availability_30) average_availability,
+		neighbourhood_cleansed
+FROM listings
+GROUP BY neighbourhood_cleansed
+ORDER BY average_availability
+
+-- It looks like Hasley Canyon and the Northwest Antelope Valley are most popular
+
+--What time of year is the cheapest time to go to your city? What about the busiest?
+
+
+
+/*--What neighborhoods seem to be the most popular?
+SELECT	neighbourhood_cleansed,
+		COUNT(*) number_of_listings
+FROM listings
+GROUP BY neighbourhood_cleansed
+ORDER BY number_of_listings DESC
+LIMIT 1
+
+-- Venice appears to be the most popular neighborhood
+*/
+
+/*
+--What's the most expensive listing? What else can you tell me about the listing?
+WITH most_expensive AS
+(
+SELECT MAX(price) price
+FROM listings
+)
+
+SELECT	COUNT(*) number_of_listings_in_neighborhood,
+		neighbourhood_cleansed,
+		*
+FROM listings
+JOIN most_expensive on most_expensive.price = listings.price
+GROUP BY neighbourhood_cleansed
+-- Most of the most expensive listings are located in Hollywood Hills West*/
